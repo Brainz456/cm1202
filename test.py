@@ -1,9 +1,10 @@
-class test:
-
-    #Variables need assigning temp values in place
-    TestID = 0
-    QuestionID = []
-    Topic = ""
+class test(object):
+	def __init__(self,TestID,Topic):
+		
+		#Variables need assigning temp values in place
+		self.TestID = int(TestID)
+		self.QuestionID = []
+		self.Topic = Topic
 
 
     def Get_Questions(QuestionID):
