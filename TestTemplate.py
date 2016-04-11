@@ -1,3 +1,5 @@
+#Basic template to work off for the front page Tkinter
+
 from tkinter import *
 
 def run_lesson():
