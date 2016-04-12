@@ -3,101 +3,107 @@ from tkinter import *
 class FinalProgram(Tk):
 
 	def __init__(self, *args, **kwargs):
+
 		Tk.__init__(self)
+		#icon and program name
+		Tk.iconbitmap(self, default = 'CardiffUniIcon.ico')
+		Tk.wm_title(self, 'DQS Program')
+
+		#creates a container that contains all the frames
 		container = Frame(self)
-
 		container.pack(side = 'top', fill = 'both', expand = True)
-
 		container.grid_rowconfigure(0, weight = 1)
 		container.grid_columnconfigure(0, weight = 1)
 
+		#creates a menu at the top of the window
 		menubar = Menu(container)
 		lessonmenu = Menu(menubar, tearoff = 0)
-		lessonmenu.add_command(label="Maths", command = viewMathsLesson)
+		lessonmenu.add_command(label="Maths Lesson", command = lambda: self.show_frame(viewMathsLesson))
+		lessonmenu.add_command(label="Architecture Lesson", command = lambda: self.show_frame(viewArchitectureLesson))
 		menubar.add_cascade(label = "Lessons", menu = lessonmenu)
-		menubar.add_command(label = "Log out", command = root.quit)
+		testmenu = Menu(menubar, tearoff = 0)
+		testmenu.add_command(label = 'Maths Test', command = lambda: self.show_frame(viewMathsTest))
+		testmenu.add_command(label = 'Architecture Test', command = lambda: self.show_frame(viewArchitectureTest))
+		menubar.add_cascade(label = 'Tests', menu = testmenu)
+		menubar.add_command(label = "Log out", command = quit)
 		Tk.config(self, menu = menubar)
-
-		menubar = Menu(container)
-		filemenu = Menu(menubar, tearoff = 0)
-
+		
+		#a dictonary of all the frames used in the program		
 		self.frames = { }
 
+		#goes through each frame in the dictonary, selecting the current frame and bringing it at the front 
 		for F in (MenuPage, LessonSelection, TestSelection, viewMathsLesson, viewArchitectureLesson, viewMathsTest, viewArchitectureTest):
 			frame = F(container,self)
 			self.frames[F] = frame
 			frame.grid(row = 0, column = 0, sticky = 'nsew')
 
+		#showing current frame
 		self.show_frame(MenuPage)
 
 	def show_frame(self, cont):
 		frame = self.frames[cont]
 		frame.tkraise()
 
+#creating the main menu page
 class MenuPage(Frame):
 	
 	def __init__(self, parent, controller):
 		Frame.__init__(self, parent)
 		self.grid()
 	
-		lblMenu = Label(self, text = 'Menu', font= ('MS', 25, 'bold'))
-		lblMenu.grid(row=3, column=7,sticky = NE)
+		lblMenu = Label(self, text = 'Menu', font= ('MS', 40))
+		lblMenu.pack(anchor=CENTER, pady=(20, 0))
 
-		butLessons = Button(self, text = "Lessons", font= ('MS', 25), 
+		butLessons = Button(self, text = "Lessons", font= ('MS', 20), 
 			command = lambda: controller.show_frame(LessonSelection))
-		butLessons.grid(row=4, column = 7)
+		butLessons.pack(anchor=CENTER, pady=(50,20))
 
-		butTests = Button(self, text = "Tests", font= ('MS', 25),
+		butTests = Button(self, text = "Tests", font= ('MS', 20),
 			command = lambda: controller.show_frame(TestSelection))
-		butTests.grid(row=5, column = 7)
+		butTests.pack(anchor=CENTER, pady=(20,50))
 
-	def view2Lessons(self):
-		print("2 lessons")
-
-	def view2Tests(self):
-		print("2tests")
-
+#creating the lesson selection page
 class LessonSelection(Frame):
 
 	def __init__(self, parent, controller):
 		Frame.__init__(self, parent)
 		self.grid()
 		
-		lblLesson = Label(self, text = 'Choose a lesson:', font= ('MS', 25, 'bold'))
-		lblLesson.grid(row=1, column=7,sticky = NE)
+		lblLesson = Label(self, text = 'Choose a lesson:', font= ('MS', 40))
+		lblLesson.pack(anchor=CENTER, pady=(20, 0))
 
-		butMathsLesson = Button(self, text ='Maths', font= ('MS', 25),
+		butMathsLesson = Button(self, text ='Maths', font= ('MS', 20),
 			command = lambda: controller.show_frame(viewMathsLesson))
-		butMathsLesson.grid(row=2, column = 7)
+		butMathsLesson.pack(anchor=CENTER, pady=(50,20))
 
-		butArchitectureLesson = Button(self, text ='Architecture', font= ('MS', 25),
+		butArchitectureLesson = Button(self, text ='Architecture', font= ('MS', 20),
 			command = lambda: controller.show_frame(viewArchitectureLesson))
-		butArchitectureLesson.grid(row=3, column = 7)
+		butArchitectureLesson.pack(anchor=CENTER, pady=(20,50))
 
-		butReturn = Button(self, text ='Return to Main Menu', font= ('MS', 25),
+		butReturn = Button(self, text ='Return to Main Menu', font= ('MS', 10),
 			command = lambda: controller.show_frame(MenuPage))
-		butReturn.grid(row=4, column = 7)
-
+		butReturn.pack(anchor=NW, pady=(50,50))
+#creating the test selection page
 class TestSelection(Frame):
 
 	def __init__(self, parent, controller):
 		Frame.__init__(self, parent)
 		self.grid()
 		
-		lblTest = Label(self, text = 'Choose a test:', font= ('MS', 25, 'bold'))
-		lblTest.grid(row=1, column=7,sticky = NE)
+		lblTest = Label(self, text = 'Choose a test:', font= ('MS', 40))
+		lblTest.pack(anchor=CENTER, pady=(20, 0))
 
-		butMathsTest = Button(self, text ='Maths', font= ('MS', 25),
+		butMathsTest = Button(self, text ='Maths', font= ('MS', 20),
 			command = lambda: controller.show_frame(viewMathsTest))
-		butMathsTest.grid(row=2, column = 7)
+		butMathsTest.pack(anchor=CENTER, pady=(50,20))
 
-		butArchitectureTest = Button(self, text ='Architecture', font= ('MS', 25),
+		butArchitectureTest = Button(self, text ='Architecture', font= ('MS', 20),
 			command = lambda: controller.show_frame(viewArchitectureTest))
-		butArchitectureTest.grid(row=3, column = 7)
+		butArchitectureTest.pack(anchor=CENTER, pady=(20,50))
 
-		butReturn = Button(self, text ='Return to Main Menu', font= ('MS', 25),
+		butReturn = Button(self, text ='Return to Main Menu', font= ('MS', 10),
 			command = lambda: controller.show_frame(MenuPage))
-		butReturn.grid(row=4, column = 7)
+		butReturn.pack(anchor=CENTER, pady=(50,50))
 
 
 class viewMathsLesson(Frame):
@@ -109,7 +115,7 @@ class viewMathsLesson(Frame):
 		lblOutput = Label(self, text = 'it will go to the maths lesson page', font = ('MS', 25))
 		lblOutput.grid(row=1, column = 7)
 
-		butReturn = Button(self, text ='Return to Main Menu', font= ('MS', 25),
+		butReturn = Button(self, text ='Return to Main Menu', font= ('MS', 10),
 			command = lambda: controller.show_frame(MenuPage))
 		butReturn.grid(row=4, column = 7)
 
@@ -123,7 +129,7 @@ class viewArchitectureLesson(Frame):
 		lblOutput = Label(self, text = 'it will go to the architecture lesson page', font = ('MS', 25))
 		lblOutput.grid(row=1, column = 7)
 
-		butReturn = Button(self, text ='Return to Main Menu', font= ('MS', 25),
+		butReturn = Button(self, text ='Return to Main Menu', font= ('MS', 10),
 			command = lambda: controller.show_frame(MenuPage))
 		butReturn.grid(row=4, column = 7)
 
@@ -136,7 +142,7 @@ class viewMathsTest(Frame):
 		lblOutput = Label(self, text = 'it will go to the maths test page', font = ('MS', 25))
 		lblOutput.grid(row=1, column = 7)
 
-		butReturn = Button(self, text ='Return to Main Menu', font= ('MS', 25),
+		butReturn = Button(self, text ='Return to Main Menu', font= ('MS', 10),
 			command = lambda: controller.show_frame(MenuPage))
 		butReturn.grid(row=4, column = 7)
 
@@ -149,11 +155,19 @@ class viewArchitectureTest(Frame):
 		lblOutput = Label(self, text = 'it will go to the architecture test page', font = ('MS', 25))
 		lblOutput.grid(row=1, column = 7)
 
-		butReturn = Button(self, text ='Return to Main Menu', font= ('MS', 25),
+		butReturn = Button(self, text ='Return to Main Menu', font= ('MS', 10),
 			command = lambda: controller.show_frame(MenuPage))
 		butReturn.grid(row=4, column = 7)
 
 root = Tk()
 root.withdraw()
+
+#fixed window dementions 
 app = FinalProgram(root)
+app.resizable(width=FALSE, height=FALSE)
+app.geometry("800x800")
+
+status_bar = Label(app, text="Logged in as ....", bd=1, relief=SUNKEN, anchor=W)
+status_bar.pack(side=BOTTOM, fill=X)
+
 root.mainloop()
