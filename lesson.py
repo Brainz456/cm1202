@@ -6,13 +6,13 @@ Created on Mon Apr 11 13:20:10 2016
 """
 class lesson:
     def __init__(self, LessonID, LessonMaterials, ImageReferences, ModuleID):
-        self.LessonID = int(LessonID)
+        self.LessonID = str(LessonID)
         self.LessonMaterials = []
         self.ImageReferences = []
         self.ModuleID = int(ModuleID)
         
     def __str__(self):
-        return "LessonID: %d, ModuleID: %s" % (self.LessonID, self.ModuleID)
+        return "LessonID: %s, ModuleID: %s" % (self.LessonID, self.ModuleID)
         
     def Take_Test(TestID, StudentID):
         #list
