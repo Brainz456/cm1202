@@ -1,2 +1,10 @@
-Q1; To be or not to bethat is the question;[to be, not to be];to be
-Q2; To be or not to be that is the question;[to be, not to be]; to be
+Q1; The errors which occur because of wrong program statement or command are called?;[Syntax errors, Logical errors, Arithmetic errors, Run-time errors]; Syntax errors
+Q2; At which stage the problem is decomposed into sub problems?; [Problem identification, Problem analyzing, Problem debugging, Problem solving]; Problem identification
+Q3; The process of finding and removing errors in the program is called;[Analyzing, Coding, Debugging, Testig]; Debugging
+Q4; If you write a formula F = m + a instead of F = m*a, in the program, then the error will be;[Arithmetic error, Run-time error, Logical error, Syntax error];Logical error
+Q5; Which of the following tasks are performed by most of the algorithms?; [Processing, Output, Input, All of these]; All of these
+Q6; Which of the following is also a problem solving activity?;[Flow chart, Programming, Algorithm, Software]; Programming
+Q7; If you try to assign a value to a constant such as 5 = count, then the error will be:;[Arithmetic error, Syntax error, Run-time error, Logical error];Syntax error
+Q8; Generally, computer algorithms perform:; [Output, Input, Processing, All of these]; All of these
+Q9; Pictorial representation of the algorithm is called:;[Desk checking, Debugging, Computer Programming, Flow Chart]; Flow Chart
+Q10; The simplest form of an algorithm is:; [Programming, Step-form algorithm, Flow Chart, Computer Programming]; Step-form algorithm
