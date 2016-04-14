@@ -49,12 +49,11 @@ class Login(Frame):
 	#GUI setup
 
 	def __init__(self, master, controller):
-		#initialise questionnaire class
 
-		Frame.__init__(self,master)
+		Frame.__init__(self, master)
 		self.grid()
-		self.createPhotoLogo()
 		self.createLoginForm()
+		self.checkCredentials()
 
 	def createLoginForm(self):
 		#create widgets to select a degree programme from a list
@@ -74,13 +73,6 @@ class Login(Frame):
 		butSubmit = Button(self, text='Submit',font=('MS', 8,'bold'), command = self.checkCredentials) 
 		butSubmit.grid(row=2, column=3, columnspan=4) 
 
-
-	def createPhotoLogo(self):
-		logo = PhotoImage(file="logo1.gif")
-		w1 = Label(root, image=logo)
-		w1.image = logo
-		w1.pack(anchor=CENTER, pady=(20, 50))
-
 	def checkCredentials(self):
 		with open("data\students.txt") as users:  # The with keyword automatically closes the file when you are done
 			users = users.read().splitlines()
@@ -93,7 +85,7 @@ class Login(Frame):
 			detail_split = details.strip().split(",")
 
 			if(detail_split[0] == username and detail_split[1].strip() == password):
-				self.controller.show_frame(LessonSelection)
+				controller.show_frame(LessonSelection)
 
 #creating the main menu page
 class MenuPage(Frame):
