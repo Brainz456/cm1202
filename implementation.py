@@ -1,4 +1,5 @@
 from tkinter import *
+import login
 
 class FinalProgram(Tk):
 
@@ -72,8 +73,7 @@ class Login(Frame):
 		self.Pass = Entry(self, show="*") 
 		self.Pass.grid(row=1, column=4, columnspan=2, sticky=E) 
 
-		butSubmit = Button(self, text='Submit',font=('MS', 8,'bold')) 
-		#buttoncommand will be inserted here
+		butSubmit = Button(self, text='Submit',font=('MS', 8,'bold'), command = lambda: login.checkCredentials("user", "password")) 
 		butSubmit.grid(row=2, column=3, columnspan=4) 
 
 
