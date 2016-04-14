@@ -6,7 +6,7 @@ class FinalProgram(Tk):
 
 		Tk.__init__(self)
 		#icon and program name
-		Tk.iconbitmap(self, default = 'CardiffUniIcon.ico')
+		#Tk.iconbitmap(self, default = 'CardiffUniIcon.ico')
 		Tk.wm_title(self, 'DQS Program')
 
 		#creates a container that contains all the frames
@@ -82,7 +82,7 @@ class LessonSelection(Frame):
 
 		butReturn = Button(self, text ='Return to Main Menu', font= ('MS', 10),
 			command = lambda: controller.show_frame(MenuPage))
-		butReturn.pack(anchor=NW, pady=(50,50))
+		butReturn.pack(anchor=CENTER, pady=(50,50))
 #creating the test selection page
 class TestSelection(Frame):
 
@@ -115,8 +115,8 @@ class viewMathsLesson(Frame):
 		lblOutput = Label(self, text = 'it will go to the maths lesson page', font = ('MS', 25))
 		lblOutput.grid(row=1, column = 7)
 
-		butReturn = Button(self, text ='Return to Main Menu', font= ('MS', 10),
-			command = lambda: controller.show_frame(MenuPage))
+		butReturn = Button(self, text ='Return to Lesson Menu', font= ('MS', 10),
+			command = lambda: controller.show_frame(LessonSelection))
 		butReturn.grid(row=4, column = 7)
 
 	
@@ -129,8 +129,8 @@ class viewArchitectureLesson(Frame):
 		lblOutput = Label(self, text = 'it will go to the architecture lesson page', font = ('MS', 25))
 		lblOutput.grid(row=1, column = 7)
 
-		butReturn = Button(self, text ='Return to Main Menu', font= ('MS', 10),
-			command = lambda: controller.show_frame(MenuPage))
+		butReturn = Button(self, text ='Return to Lesson Menu', font= ('MS', 10),
+			command = lambda: controller.show_frame(LessonSelection))
 		butReturn.grid(row=4, column = 7)
 
 class viewMathsTest(Frame):
@@ -142,8 +142,8 @@ class viewMathsTest(Frame):
 		lblOutput = Label(self, text = 'it will go to the maths test page', font = ('MS', 25))
 		lblOutput.grid(row=1, column = 7)
 
-		butReturn = Button(self, text ='Return to Main Menu', font= ('MS', 10),
-			command = lambda: controller.show_frame(MenuPage))
+		butReturn = Button(self, text ='Return to Test Menu', font= ('MS', 10),
+			command = lambda: controller.show_frame(TestSelection))
 		butReturn.grid(row=4, column = 7)
 
 class viewArchitectureTest(Frame):
@@ -155,8 +155,8 @@ class viewArchitectureTest(Frame):
 		lblOutput = Label(self, text = 'it will go to the architecture test page', font = ('MS', 25))
 		lblOutput.grid(row=1, column = 7)
 
-		butReturn = Button(self, text ='Return to Main Menu', font= ('MS', 10),
-			command = lambda: controller.show_frame(MenuPage))
+		butReturn = Button(self, text ='Return to Test Menu', font= ('MS', 10),
+			command = lambda: controller.show_frame(TestSelection))
 		butReturn.grid(row=4, column = 7)
 
 root = Tk()
