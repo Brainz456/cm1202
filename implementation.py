@@ -33,7 +33,7 @@ class FinalProgram(Tk):
 		self.frames = { }
 
 		#goes through each frame in the dictonary, selecting the current frame and bringing it at the front 
-		for F in (Login, MenuPage, LessonSelection, TestSelection, viewMathsLesson, viewArchitectureLesson, viewMathsTest, viewArchitectureTest):
+		for F in (Login, MenuPage, LessonSelection, TestSelection, viewMathsLesson, viewArchitectureLesson, viewMathsTest, viewArchitectureTest, adminPage, addLesson, addTest, viewResults):
 			frame = F(container,self)
 			self.frames[F] = frame
 			frame.grid(row = 0, column = 0, sticky = 'nsew')
@@ -60,25 +60,25 @@ class Login(Frame):
 		#create widgets to select a degree programme from a list
 
 		lblUser = Label(self, text='Username:', font=('MS', 8,'bold'))
-		lblUser.grid(row=0, column=3, columnspan=1, sticky=E) 
+		lblUser.grid(row=0, column=3, columnspan=1) 
 
 		lblPW = Label(self, text='Password:', font=('MS', 8,'bold'))
-		lblPW.grid(row=1, column=3, columnspan=1, sticky=E) 
+		lblPW.grid(row=1, column=3, columnspan=1) 
 
 		self.User = Entry(self) 
-		self.User.grid(row=0, column=4, columnspan=2, sticky=E) 
+		self.User.grid(row=0, column=4, columnspan=2) 
 
 		self.Pass = Entry(self, show="*") 
-		self.Pass.grid(row=1, column=4, columnspan=2, sticky=E) 
+		self.Pass.grid(row=1, column=4, columnspan=2) 
 
 		butSubmit = Button(self, text='Submit',font=('MS', 8,'bold'), command = self.checkCredentials) 
 		butSubmit.grid(row=2, column=3, columnspan=4) 
 
 	def checkCredentials(self):
-		with open("data\students.txt") as users:  # The with keyword automatically closes the file when you are done
+		with open("data\students.txt") as users: 
 			users = users.read().splitlines()
 
-		with open("data\lecturers.txt") as lectures:  # The with keyword automatically closes the file when you are done
+		with open("data\lecturers.txt") as lectures: 
 			lectures = lectures.read().splitlines()
 		
 		username = self.User.get()
@@ -92,13 +92,14 @@ class Login(Frame):
 				self.controller.show_frame(LessonSelection)
 				return
 
-		for admin_detail in lectures:
-			admin_details = admin_detail.strip().split(",")
+		for lecture_detail in lectures:
+			lecture_details = lecture_detail.strip().split(",")
 
-			if(admin_details[0] == username and admin_details[1].strip() == password):
-				#Go to lecturer display
-				self.controller.show_frame(LessonSelection)
+			if(lecture_details[0] == username and lecture_details[1].strip() == password):
+				#Go to student display
+				self.controller.show_frame(adminPage)
 				return
+
 		#else bring up error
 		tkinter.messagebox.showinfo("Error", "Invalid Input")
 
@@ -144,6 +145,31 @@ class LessonSelection(Frame):
 			command = lambda: controller.show_frame(MenuPage))
 		butReturn.pack(anchor=CENTER, pady=(50,50))
 #creating the test selection page
+
+#creating the lesson selection page
+class adminPage(Frame):
+
+	def __init__(self, parent, controller):
+		Frame.__init__(self, parent)
+		self.grid()
+		
+		lblLesson = Label(self, text = 'Admin', font= ('MS', 40))
+		lblLesson.pack(anchor=CENTER, pady=(20, 0))
+
+		butMathsLesson = Button(self, text ='Add Lesson', font= ('MS', 20),
+			command = lambda: controller.show_frame(addLesson))
+		butMathsLesson.pack(anchor=CENTER, pady=(50,20))
+
+		butArchitectureLesson = Button(self, text ='Add Test', font= ('MS', 20),
+			command = lambda: controller.show_frame(addTest))
+		butArchitectureLesson.pack(anchor=CENTER, pady=(20,50))
+
+		butArchitectureLesson = Button(self, text ='View Test Results', font= ('MS', 20),
+			command = lambda: controller.show_frame(viewResults))
+		butArchitectureLesson.pack(anchor=CENTER, pady=(0,50))
+
+#creating the test selection page
+
 class TestSelection(Frame):
 
 	def __init__(self, parent, controller):
@@ -218,6 +244,48 @@ class viewArchitectureTest(Frame):
 		butReturn = Button(self, text ='Return to Test Menu', font= ('MS', 10),
 			command = lambda: controller.show_frame(TestSelection))
 		butReturn.grid(row=4, column = 7)
+
+class addLesson(Frame):
+
+	def __init__(self, parent, controller):
+		Frame.__init__(self,parent)
+		self.grid()
+
+		lblOutput = Label(self, text = 'Add Lesson', font = ('MS', 25))
+		lblOutput.grid(row=1, column = 7)
+
+		butReturn = Button(self, text ='Return to Test Menu', font= ('MS', 10),
+			command = lambda: controller.show_frame(adminPage))
+		butReturn.grid(row=4, column = 7)
+
+class addTest(Frame):
+
+	def __init__(self, parent, controller):
+		Frame.__init__(self,parent)
+		self.grid()
+
+		lblOutput = Label(self, text = 'Add Test', font = ('MS', 25))
+		lblOutput.grid(row=1, column = 7)
+
+		butReturn = Button(self, text ='Return to Test Menu', font= ('MS', 10),
+			command = lambda: controller.show_frame(adminPage))
+		butReturn.grid(row=4, column = 7)
+
+class viewResults(Frame):
+
+	def __init__(self, parent, controller):
+		Frame.__init__(self,parent)
+		self.grid()
+
+		lblOutput = Label(self, text = 'View Results', font = ('MS', 25))
+		lblOutput.grid(row=1, column = 7)
+
+		
+		
+		butReturn = Button(self, text ='Return to Test Menu', font= ('MS', 10),
+			command = lambda: controller.show_frame(adminPage))
+		butReturn.grid(row=4, column = 7)
+
 
 root = Tk()
 root.withdraw()
