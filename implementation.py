@@ -248,15 +248,35 @@ class viewArchitectureTest(Frame):
 class addLesson(Frame):
 
 	def __init__(self, parent, controller):
-		Frame.__init__(self,parent)
+		Frame.__init__(self, parent)
+		self.controller = controller
 		self.grid()
 
 		lblOutput = Label(self, text = 'Add Lesson', font = ('MS', 25))
 		lblOutput.grid(row=1, column = 7)
 
+		lbTitle = Label(self, text = 'Lesson Title', font = ('MS', 15))
+		lbTitle.grid(row=2, column = 7)	
+		title = Text(self,width=40, height=1)
+		title.grid(row=2, column = 8)
+
+		lbContent = Label(self, text = 'Lesson Content', font = ('MS', 15))
+		lbContent.grid(row=3, column = 7)	
+		
+		contents = Text(self, height=20, width=40)
+		contents.grid(row=3, column = 8)
+
+		butReturn = Button(self, text ='Add Lesson', font= ('MS', 15),
+			command = addLesson)
+		butReturn.grid(row=4, column = 8, pady=10)
+
 		butReturn = Button(self, text ='Return to Test Menu', font= ('MS', 10),
 			command = lambda: controller.show_frame(adminPage))
-		butReturn.grid(row=4, column = 7)
+		butReturn.grid(row=5, column = 7)
+
+	def addLesson(self):
+		controller.show_frame(adminPage)
+		tkinter.messagebox.showinfo("Error", "Invalid Input")
 
 class addTest(Frame):
 
@@ -280,8 +300,8 @@ class viewResults(Frame):
 		lblOutput = Label(self, text = 'View Results', font = ('MS', 25))
 		lblOutput.grid(row=1, column = 7)
 
-		
-		
+
+
 		butReturn = Button(self, text ='Return to Test Menu', font= ('MS', 10),
 			command = lambda: controller.show_frame(adminPage))
 		butReturn.grid(row=4, column = 7)
