@@ -32,17 +32,56 @@ class FinalProgram(Tk):
 		self.frames = { }
 
 		#goes through each frame in the dictonary, selecting the current frame and bringing it at the front 
-		for F in (MenuPage, LessonSelection, TestSelection, viewMathsLesson, viewArchitectureLesson, viewMathsTest, viewArchitectureTest):
+		for F in (Login, MenuPage, LessonSelection, TestSelection, viewMathsLesson, viewArchitectureLesson, viewMathsTest, viewArchitectureTest):
 			frame = F(container,self)
 			self.frames[F] = frame
 			frame.grid(row = 0, column = 0, sticky = 'nsew')
 
 		#showing current frame
-		self.show_frame(MenuPage)
+		self.show_frame(Login)
 
 	def show_frame(self, cont):
 		frame = self.frames[cont]
 		frame.tkraise()
+
+
+class Login(Frame):
+	#GUI setup
+
+	def __init__(self, master, controller):
+		#initialise questionnaire class
+
+		Frame.__init__(self,master)
+		self.grid()
+		self.createPhotoLogo()
+		self.createLoginForm()
+
+
+	def createLoginForm(self):
+		#create widgets to select a degree programme from a list
+
+		lblUser = Label(self, text='Username:', font=('MS', 8,'bold'))
+		lblUser.grid(row=0, column=3, columnspan=1, sticky=E) 
+
+		lblPW = Label(self, text='Password:', font=('MS', 8,'bold'))
+		lblPW.grid(row=1, column=3, columnspan=1, sticky=E) 
+
+		self.User = Entry(self) 
+		self.User.grid(row=0, column=4, columnspan=2, sticky=E) 
+
+		self.Pass = Entry(self, show="*") 
+		self.Pass.grid(row=1, column=4, columnspan=2, sticky=E) 
+
+		butSubmit = Button(self, text='Submit',font=('MS', 8,'bold')) 
+		#buttoncommand will be inserted here
+		butSubmit.grid(row=2, column=3, columnspan=4) 
+
+
+	def createPhotoLogo(self):
+		logo = PhotoImage(file="logo1.gif")
+		w1 = Label(root, image=logo)
+		w1.image = logo
+		w1.pack(anchor=CENTER, pady=(20,50))
 
 #creating the main menu page
 class MenuPage(Frame):
