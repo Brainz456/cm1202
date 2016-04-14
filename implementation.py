@@ -1,4 +1,5 @@
 from tkinter import *
+import tkinter.messagebox
 
 class FinalProgram(Tk):
 
@@ -51,6 +52,7 @@ class Login(Frame):
 	def __init__(self, master, controller):
 
 		Frame.__init__(self, master)
+		self.controller = controller
 		self.grid()
 		self.createLoginForm()
 		self.checkCredentials()
@@ -76,16 +78,32 @@ class Login(Frame):
 	def checkCredentials(self):
 		with open("data\students.txt") as users:  # The with keyword automatically closes the file when you are done
 			users = users.read().splitlines()
+
+		with open("data\lecturers.txt") as lectures:  # The with keyword automatically closes the file when you are done
+			lectures = lectures.read().splitlines()
 		
 		username = self.User.get()
 		password = self.Pass.get()
 
 		for details in users:
-			
-			detail_split = details.strip().split(",")
+			user_details = details.strip().split(",")
 
-			if(detail_split[0] == username and detail_split[1].strip() == password):
-				controller.show_frame(LessonSelection)
+			if(user_details[0] == username and user_details[1].strip() == password):
+				#Go to student display
+				self.controller.show_frame(LessonSelection)
+				return
+
+		for admin_detail in lectures:
+			admin_details = admin_detail.strip().split(",")
+
+			if(admin_details[0] == username and admin_details[1].strip() == password):
+				#Go to lecturer display
+				self.controller.show_frame(LessonSelection)
+				return
+		#else bring up error
+		tkinter.messagebox.showinfo("Error", "Invalid Input")
+
+
 
 #creating the main menu page
 class MenuPage(Frame):
@@ -210,7 +228,7 @@ app = FinalProgram(root)
 app.resizable(width=FALSE, height=FALSE)
 app.geometry("800x800")
 
-status_bar = Label(app, text="Logged in as ....", bd=1, relief=SUNKEN, anchor=W)
+status_bar = Label(app, text="Logged in as", bd=1, relief=SUNKEN, anchor=W)
 status_bar.pack(side=BOTTOM, fill=X)
 
 root.mainloop()
