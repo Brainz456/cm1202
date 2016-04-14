@@ -55,7 +55,6 @@ class Login(Frame):
 		self.controller = controller
 		self.grid()
 		self.createLoginForm()
-		self.checkCredentials()
 
 	def createLoginForm(self):
 		#create widgets to select a degree programme from a list
