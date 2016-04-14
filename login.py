@@ -6,4 +6,6 @@ def checkCredentials(username, password):
 		detail_split = details.strip().split(",")
 
 		if(detail_split[0] == username and detail_split[1].strip() == password):
-			show_frame(MenuPage)
+			Frame.__init__(self, parent)
+			self.grid()
+			controller.show_frame(MenuPage)
