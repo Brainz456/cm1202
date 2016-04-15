@@ -18,7 +18,7 @@ class FinalProgram(Tk):
 
 		#creates a menu at the top of the window
 		menubar = Menu(container)
-		lessonmenu = Menu(menubar, tearoff = 0)
+		#lessonmenu = Menu(menubar, tearoff = 0)
 		#lessonmenu.add_command(label="Maths Lesson", command = lambda: self.show_frame(viewMathsLesson))
 		#lessonmenu.add_command(label="Architecture Lesson", command = lambda: self.show_frame(viewArchitectureLesson))
 		#menubar.add_cascade(label = "Lessons", menu = lessonmenu)
@@ -26,7 +26,7 @@ class FinalProgram(Tk):
 		#testmenu.add_command(label = 'Maths Test', command = lambda: self.show_frame(viewMathsTest))
 		#testmenu.add_command(label = 'Architecture Test', command = lambda: self.show_frame(viewArchitectureTest))
 		#menubar.add_cascade(label = 'Tests', menu = testmenu)
-		menubar.add_command(label = "Log out", command = quit)
+		menubar.add_command(label = "Exit", command = quit)
 		Tk.config(self, menu = menubar)
 		
 		#a dictonary of all the frames used in the program		
