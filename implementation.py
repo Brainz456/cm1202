@@ -5,9 +5,9 @@ class FinalProgram(Tk):
 
 	def __init__(self, *args, **kwargs):
 
-		Tk.__init__(self)
+		Toplevel.__init__(self)
 		#icon and program name
-		#Tk.iconbitmap(self, default = 'CardiffUniIcon.ico')
+		Tk.iconbitmap(self, default = 'CardiffUniIcon.ico')
 		Tk.wm_title(self, 'DQS Program')
 
 		#creates a container that contains all the frames
@@ -196,28 +196,136 @@ class viewMathsLesson(Frame):
 
 	def __init__(self, parent, controller):
 		Frame.__init__(self,parent)
+		page_num = [0]
+		self.showImage(page_num[0])
 		self.grid()
-		
-		lblOutput = Label(self, text = 'it will go to the maths lesson page', font = ('MS', 25))
-		lblOutput.grid(row=1, column = 7)
+		lblOutput = Label(self, text = 'Maths Lesson', font = ('MS', 25))
+		lblOutput.grid(row=1, column = 3)
 
 		butReturn = Button(self, text ='Return to Lesson Menu', font= ('MS', 10),
 			command = lambda: controller.show_frame(LessonSelection))
-		butReturn.grid(row=4, column = 7)
+		butReturn.grid(row=1, column = 3, sticky = W)
+		
+		
+		butNext = Button(self, text = 'Next Page', font = ('MS',10),
+			command = lambda:  next_page(page_num[0]))
+		butNext.grid(row = 5, column = 3, sticky = E)
 
-	
+		butPrev = Button(self, text = 'Previous Page', font = ('MS',10),
+			command = lambda:  prev_page(page_num[0]))
+		butPrev.grid(row = 5, column = 3, sticky = W)
+		
+		def next_page(number):
+			number += 1
+			if number == 0:
+				return
+			self.showImage(number)
+			page_num[0] = number
+
+		def prev_page(number):
+			if number == 0:
+				return
+			number -= 1
+			self.showImage(number)
+			page_num[0] = number
+	def showImage(self, page_num):
+		list_of_images = [
+		'architecture_set2_handouts-page-001.gif',
+		'architecture_set2_handouts-page-002.gif', 
+		'architecture_set2_handouts-page-003.gif', 
+		'architecture_set2_handouts-page-004.gif',
+		'architecture_set2_handouts-page-005.gif',
+		'architecture_set2_handouts-page-006.gif',
+		'architecture_set2_handouts-page-007.gif',
+		'architecture_set2_handouts-page-008.gif',
+		'architecture_set2_handouts-page-009.gif',
+		'architecture_set2_handouts-page-010.gif',
+		'architecture_set2_handouts-page-011.gif',
+		'architecture_set2_handouts-page-012.gif',
+		'architecture_set2_handouts-page-013.gif',
+		'architecture_set2_handouts-page-014.gif',
+		'architecture_set2_handouts-page-015.gif',
+		'architecture_set2_handouts-page-016.gif',
+		'architecture_set2_handouts-page-017.gif',
+		'architecture_set2_handouts-page-018.gif',
+		'architecture_set2_handouts-page-019.gif',
+		'architecture_set2_handouts-page-020.gif',
+		'architecture_set2_handouts-page-021.gif',
+		'architecture_set2_handouts-page-022.gif',
+		'architecture_set2_handouts-page-023.gif',
+		'architecture_set2_handouts-page-024.gif',
+		'architecture_set2_handouts-page-025.gif',
+		'architecture_set2_handouts-page-026.gif',
+		'architecture_set2_handouts-page-027.gif'
+		]
+		photo = PhotoImage(file = list_of_images[page_num])
+		lblphoto = Label(self, image = photo)
+		lblphoto.image = photo
+		lblphoto.grid( row = 2, column = 3)
+		
 class viewArchitectureLesson(Frame):
 
 	def __init__(self, parent, controller):
 		Frame.__init__(self,parent)
+		page_num = [0]
+		self.showImage(page_num[0])
 		self.grid()
-
-		lblOutput = Label(self, text = 'it will go to the architecture lesson page', font = ('MS', 25))
-		lblOutput.grid(row=1, column = 7)
+		lblOutput = Label(self, text = 'Architecture Lesson', font = ('MS', 25))
+		lblOutput.grid(row=1, column = 3)
 
 		butReturn = Button(self, text ='Return to Lesson Menu', font= ('MS', 10),
 			command = lambda: controller.show_frame(LessonSelection))
-		butReturn.grid(row=4, column = 7)
+		butReturn.grid(row=1, column = 3, sticky = W)
+		
+		
+		butNext = Button(self, text = 'Next Page', font = ('MS',10),
+			command = lambda:  next_page(page_num[0]))
+		butNext.grid(row = 5, column = 3, sticky = E)
+
+		butPrev = Button(self, text = 'Previous Page', font = ('MS',10),
+			command = lambda:  prev_page(page_num[0]))
+		butPrev.grid(row = 5, column = 3, sticky = W)
+		
+		def next_page(number):
+			number += 1
+			if number == 0:
+				return
+			self.showImage(number)
+			page_num[0] = number
+
+		def prev_page(number):
+			if number == 0:
+				return
+			number -= 1
+			self.showImage(number)
+			page_num[0] = number
+	def showImage(self, page_num):
+		list_of_images = [
+		'architecture_set3_handouts-page-001.gif',
+		'architecture_set3_handouts-page-002.gif',
+		'architecture_set3_handouts-page-003.gif',
+		'architecture_set3_handouts-page-004.gif',
+		'architecture_set3_handouts-page-005.gif',
+		'architecture_set3_handouts-page-006.gif',
+		'architecture_set3_handouts-page-007.gif',
+		'architecture_set3_handouts-page-008.gif',
+		'architecture_set3_handouts-page-009.gif',
+		'architecture_set3_handouts-page-010.gif',
+		'architecture_set3_handouts-page-011.gif',
+		'architecture_set3_handouts-page-012.gif',
+		'architecture_set3_handouts-page-013.gif',
+		'architecture_set3_handouts-page-014.gif',
+		'architecture_set3_handouts-page-015.gif',
+		'architecture_set3_handouts-page-016.gif',
+		'architecture_set3_handouts-page-017.gif',
+		'architecture_set3_handouts-page-018.gif',
+		'architecture_set3_handouts-page-019.gif',
+		'architecture_set3_handouts-page-020.gif'
+		]
+		photo = PhotoImage(file = list_of_images[page_num])
+		lblphoto = Label(self, image = photo)
+		lblphoto.image = photo
+		lblphoto.grid( row = 2, column = 3)
 
 class viewMathsTest(Frame):
 
